@@ -2,6 +2,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
+from django.http import Http404
+from rest_framework.views import APIView
 from articles.models import Article
 from articles.serializers import ArticleSerializer
 
@@ -22,6 +24,9 @@ def articleAPI(request):
             print(serializer.errors)        # 개발 단계에선 error의 정보를 알면 좋지만, 실제에선 쓰면 X
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         # return Response()                       # 저장하고 나서 http status code, allow options, content-type, Vary 가 뜸
+
+
+
         
 @api_view(['GET', 'PUT', 'DELETE'])
 def articleDetailAPI(request, article_id):
